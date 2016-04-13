@@ -16,6 +16,6 @@ export class UserList {
   constructor(public github: Github, public params: RouteParams) {}
 
   ngOnInit() {
-    this.users = this.github.getUser('');
+    this.users = this.github.getUsers();
   }
 }

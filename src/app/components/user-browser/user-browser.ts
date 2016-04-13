@@ -1,6 +1,7 @@
 import {Component} from 'angular2/core';
 import {Router, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {UserList} from '../user-list/user-list';
+import {UserDetail} from '../user-detail/user-detail';
 import {Github} from '../../services/github';
 
 @Component({
@@ -13,6 +14,7 @@ import {Github} from '../../services/github';
 })
 @RouteConfig([
 	{path: '/',       component: UserList,   name: 'UserList'},
+  {path: '/:name',  component: UserDetail,    name: 'UserDetail'},
 ])
 export class UserBrowser {
 

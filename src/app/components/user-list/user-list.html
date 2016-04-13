@@ -1,1 +1,8 @@
 <h3>User list</h3>
+<ul>
+	<li *ngFor="#user of users | async">
+    <a [routerLink]=" ['UserDetail', {name: user.login}] ">
+      {{ user.login }}
+    </a>
+  </li>
+</ul>

@@ -6,8 +6,12 @@ import 'rxjs/add/operator/map';
 export class Github {
 	constructor(private http: Http) {}
 
-	getUser(org:string){
+	getUsers(){
 		return this.makeRequest(`users`);
+	}
+
+	getUser(user:string){
+		return this.makeRequest(`users/${user}`);
 	}
 
 	getOrg(org:string){
