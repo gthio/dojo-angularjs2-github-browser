@@ -6,6 +6,17 @@ import 'rxjs/add/operator/map';
 export class Github {
 	constructor(private http: Http) {}
 
+  searchUsers(searchFor: string){
+    if (searchFor != null &&
+      searchFor.length > 0){
+        return this.makeSearchRequest('users',
+          searchFor);  
+    } 
+    else {
+      return this.getUsers();      
+    }
+  }
+
 	getUsers(){
 		return this.makeRequest(`users`);
 	}
@@ -34,4 +45,16 @@ export class Github {
 		return this.http.get(url, {search: params})
 			.map((res) => res.json());
 	}
+  
+	private makeSearchRequest(path: string,
+    searchFor: string){
+      
+      let params = new URLSearchParams();
+      params.set('q', searchFor);
+      
+      let url = `https://api.github.com/search/${ path }`;
+      
+      return this.http.get(url, {search: params})
+        .map((res) => res.json().items);
+	}  
 }

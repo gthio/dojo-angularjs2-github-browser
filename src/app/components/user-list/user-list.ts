@@ -16,6 +16,8 @@ export class UserList {
   constructor(public github: Github, public params: RouteParams) {}
 
   ngOnInit() {
-    this.users = this.github.getUsers();
+    let parameter = this.params.get('searchFor');
+
+    this.users = this.github.searchUsers(parameter);
   }
 }

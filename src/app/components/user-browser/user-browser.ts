@@ -20,8 +20,7 @@ export class UserBrowser {
 
   constructor(private router:Router, private github: Github) {}
 
-  searchForUser(userName: string){
-        this.router.navigate(['UserList'])
+  searchForUser(searchKey: string){
+        this.router.navigate(['UserList', {searchFor: searchKey}]);
   }
-
 }
