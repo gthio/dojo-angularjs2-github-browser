@@ -11,10 +11,11 @@
   <div>
     <ul>
       <li>{{userDetails.email}}</li>
+      <li>{{userDetails.blog}}</li>
       <li>{{userDetails.company}}</li>
       <li>{{userDetails.location}}</li>
-      <li>{{userDetails.blog}}</li>
       <li>{{userDetails.hireable}}</li>
+      <li>{{userDetails.type}}</li>
     </ul>
   </div>
   <div>
@@ -30,7 +31,15 @@
 <h3>Repo list</h3>
 <ul>
 	<li *ngFor="#repo of userRepos">
-      {{ repo.name }}
+    {{ repo.name }}
+    {{ repo.description }}
+    {{ repo.fork }}
+    {{ repo.size }}
+    {{ repo.language }}
+    {{ repo.stargazers_count }}
+    {{ repo.watchers_count }}
+    {{ repo.created_at }}
+      
   </li>
 </ul>
       
