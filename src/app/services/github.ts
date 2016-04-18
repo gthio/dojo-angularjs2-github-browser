@@ -36,6 +36,10 @@ export class Github {
 	getRepoForOrg(org:string, repo:string){
 		return this.makeRequest(`repos/${org}/${repo}`);
 	}
+  
+  getReposForUser(user: string){
+    return this.makeRequest(`users/${user}/repos`);
+  }
 
 	private makeRequest(path: string){
 		let params = new URLSearchParams();

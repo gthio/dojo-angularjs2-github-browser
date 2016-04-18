@@ -27,4 +27,12 @@
   </div>
 </div>
 
+<h3>Repo list</h3>
+<ul>
+	<li *ngFor="#repo of userRepos">
+      {{ repo.name }}
+  </li>
+</ul>
+      
 <pre>this.userDetails = {{ userDetails | json }}</pre>
+<pre>this.userRepos = {{ userRepos | json }}</pre>

@@ -13,6 +13,8 @@ import {Github} from '../../services/github';
 })
 export class UserDetail {
   userDetails = {};
+  userRepos = [];
+  
   constructor(public routeParams:RouteParams, public github: Github) {}
 
   ngOnInit() {
@@ -20,5 +22,10 @@ export class UserDetail {
       .subscribe(userDetails => {
         this.userDetails = userDetails;
       });
+      
+    this.github.getReposForUser(this.routeParams.get('name'))   
+      .subscribe(userRepos => {
+        this.userRepos = userRepos;
+      });     
   }
 }
