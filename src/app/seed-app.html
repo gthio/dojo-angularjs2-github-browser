@@ -1,29 +1,30 @@
-<h3>
-  GIT
-</h3>
-<nav>
-	<a [routerLink]=" ['/Home'] ">
-    Home
-  </a>
-  |
-	<a [routerLink]=" ['/About'] ">
-    About
-  </a>
-  |
-	<a [routerLink]=" ['/RepoBrowser/RepoList', {org: 'angular'}] ">
-    Github Repos
-  </a>
-  |
-	<a [routerLink]=" ['/UserBrowser/UserList', {name: 'gthio'}] ">
-    Github Users
-  </a>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <nav>
+      <a [routerLink]=" ['/Home'] ">
+        Home
+      </a>
+      |
+      <a [routerLink]=" ['/About'] ">
+        About
+      </a>
+      |
+      <a [routerLink]=" ['/RepoBrowser/RepoList', {org: 'angular'}] ">
+        Github Repos
+      </a>
+      |
+      <a [routerLink]=" ['/UserBrowser/UserList', {name: 'gthio'}] ">
+        Github Users
+      </a>
+    </nav>
+  </div>
 </nav>
 
 <main>
-	<router-outlet></router-outlet>
+  <div class="container">
+	  <router-outlet></router-outlet>
+  </div>
 </main>
 
-
 <footer>
-  © 2016
 </footer>
