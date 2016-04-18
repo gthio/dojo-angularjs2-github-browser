@@ -1,3 +1,30 @@
 <h2>{{ userDetails.login }}</h2>
 
+<div style="width:250px;">
+  <img class="user-image" src={{userDetails.avatar_url}} />      
+</div>
+<div>
+  <div>
+    <li>{{userDetails.name}}</li>  
+    <li>{{userDetails.login}}</li>
+  </div>
+  <div>
+    <ul>
+      <li>{{userDetails.email}}</li>
+      <li>{{userDetails.company}}</li>
+      <li>{{userDetails.location}}</li>
+      <li>{{userDetails.blog}}</li>
+      <li>{{userDetails.hireable}}</li>
+    </ul>
+  </div>
+  <div>
+    <ul>
+      <li>{{userDetails.public_repos}}</li>
+      <li>{{userDetails.public_gists}}</li>
+      <li>{{userDetails.followers}}</li>
+      <li>{{userDetails.following}}</li>
+    </ul>
+  </div>
+</div>
+
 <pre>this.userDetails = {{ userDetails | json }}</pre>
