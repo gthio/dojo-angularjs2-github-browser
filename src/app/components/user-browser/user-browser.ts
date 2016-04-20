@@ -20,13 +20,10 @@ import {WINDOW, WINDOW_PROVIDERS} from '../../services/window-service';
 export class UserBrowser {
 
   constructor(private router:Router, 
-    private github: Github, 
-    @Inject(WINDOW) win2 ) {
-
-      win2.alert('Test Alert');
+    private github: Github) {
   }
 
   searchForUser(searchKey: string){
-        this.router.navigate(['UserList', {searchFor: searchKey}]);
+    this.router.navigate(['UserList', {searchFor: searchKey}]);
   }
 }
