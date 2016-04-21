@@ -1,12 +1,14 @@
 import {Injectable} from 'angular2/core';
-import {Http, URLSearchParams} from 'angular2/http';
+import {Http, URLSearchParams, Response} from 'angular2/http';
+import {Observable} from 'rxjs/Observable'
 import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class Github {
 	constructor(private http: Http) {}
 
-  searchUsers(searchFor: string){
+  searchUsers(searchFor: string) : Observable<any[]>{
     if (searchFor != null &&
       searchFor.length > 0){
         return this.makeSearchRequest('users',
@@ -43,11 +45,13 @@ export class Github {
 
 	private makeRequest(path: string){
 		let params = new URLSearchParams();
-		params.set('per_page', '100');
+		params.set('per_page', '5');
 
 		let url = `https://api.github.com/${ path }`;
 		return this.http.get(url, {search: params})
-			.map((res) => res.json());
+			.map((res) => res.json())
+      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .catch(this.handleError);      
 	}
   
 	private makeSearchRequest(path: string,
@@ -55,10 +59,18 @@ export class Github {
       
       let params = new URLSearchParams();
       params.set('q', searchFor);
-      
+		  params.set('per_page', '5');
+          
       let url = `https://api.github.com/search/${ path }`;
       
       return this.http.get(url, {search: params})
-        .map((res) => res.json().items);
+        .map((res) => res.json().items)
+        .do(data => console.log('All: ' + JSON.stringify(data)))
+        .catch(this.handleError);
 	}  
+  
+  private handleError(error: Response){
+    console.error(error);
+    return Observable.throw(error.json().error || 'Server error');
+  }
 }
