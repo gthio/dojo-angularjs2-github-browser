@@ -1,8 +1,12 @@
 import {Component, Inject} from 'angular2/core';
 import {Github} from '../../services/github';
+import {Observer} from 'rxjs/Observer';
 import {Observable} from 'rxjs/Observable';
 import {RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 import {InfiniteScrollDirective} from '../directive/infinite-scroll-directive';
+import {Injectable} from 'angular2/core';
+
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'user-list',
@@ -13,24 +17,31 @@ import {InfiniteScrollDirective} from '../directive/infinite-scroll-directive';
   pipes: []
 })
 export class UserList {
+  
   users: Observable<any>
-    items = [];
+  private userObserver: Observer<any> 
     
-  constructor(public github: Github, public params: RouteParams) {}
+  constructor(public github: Github, 
+    public params: RouteParams) {
+  }
 
   ngOnInit() {
-    let parameter = this.params.get('searchFor');
-
-    this.users = this.github.searchUsers(parameter);
+    this.users = new Observable(observer => this.userObserver = observer);
   }
   
   loadMore($event: any){
    
     console.log('Load ' + $event.pageNumber);
-    
-    for (var i = 1; i <= 5; i++) {
-      var temp = ($event.pageNumber * 5) + i;
-      this.items.push({id: temp});
-    }    
+
+    let temp = ($event.pageNumber * 5);
+      
+    let parameter = this.params.get('searchFor');
+      
+    let result = this.github.searchUsers('gunawan',
+      temp.toString());
+      
+    result.subscribe(data => {        
+      this.userObserver.next(data);  
+      });
   }  
 }

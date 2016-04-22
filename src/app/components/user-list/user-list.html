@@ -2,14 +2,10 @@
 
 <div style="height:100px; overflow:auto; border:1px" [InfiniteScroll] (scroll2)="loadMore($event)">
   <ul>
-    <li *ngFor="#item of items">{{item.id}}</li>
+    <li *ngFor="#user of users | async">
+      <a [routerLink]=" ['UserDetail', {name: user.login}] ">
+        {{ user.login }}
+      </a>
+    </li> 
   </ul>  
 </div>
-
-<ul>
-	<li *ngFor="#user of users | async">
-    <a [routerLink]=" ['UserDetail', {name: user.login}] ">
-      {{ user.login }}
-    </a>
-  </li>
-</ul>
