@@ -1,7 +1,7 @@
 {
-  "name": "angular2-seed",
+  "name": "DOJO-ANGULARJS2-GITHUB-BROWSER",
   "version": "1.0.0",
-  "description": "A simple starter Angular2 project",
+  "description": "A simple test project",
   "scripts": {
     "typings-install": "./node_modules/.bin/typings install",
     "postinstall": "npm run typings-install",
@@ -9,10 +9,7 @@
     "watch": "npm run build -- --watch",
     "start": "./node_modules/.bin/webpack-dev-server --inline --colors --progress --display-error-details --display-cached --port 3000  --content-base src"
   },
-  "contributors": [
-    "Rob Wormald <robwormald@gmail.com>",
-    "PatrickJS <github@gdi2290.com>"
-  ],
+  "contributors": [],
   "license": "MIT",
   "devDependencies": {
     "awesome-typescript-loader": "~0.16.2",
@@ -35,16 +32,6 @@
   },
   "keywords": [
     "Angular2",
-    "angular2-seed",
-    "official angular 2 seed",
-    "official angular2 seed"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/angular/angular2-seed.git"
-  },
-  "bugs": {
-    "url": "https://github.com/angular/angular2-seed/issues"
-  },
-  "homepage": "https://github.com/angular/angular2-seed#readme"
+    "angular2-seed"
+  ]
 }
