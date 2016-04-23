@@ -33,12 +33,14 @@ export class UserList {
    
     console.log('Load ' + $event.pageNumber);
 
-    let temp = ($event.pageNumber * 5);
+    let pageNumber = $event.pageNumber;
+    let pageSize = '10';
       
     let parameter = this.params.get('searchFor');
       
-    let result = this.github.searchUsers('gunawan',
-      temp.toString());
+    let result = this.github.searchUsers(parameter,
+      pageNumber,
+      pageSize);
       
     result.subscribe(data => {        
       this.userObserver.next(data);  

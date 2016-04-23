@@ -1,27 +1,33 @@
 import {Injectable} from 'angular2/core';
+import {Observable} from 'rxjs/Observable';
 import {Http, URLSearchParams, Response} from 'angular2/http';
-import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @Injectable()
 export class Github {
 	constructor(private http: Http) {}
 
   searchUsers(searchFor: string,
-    perPage: string = '10'){
+    page: string = '1',
+    perPage: string = '100'){
       if (searchFor != null &&
         searchFor.length > 0){
           return this.makeSearchRequest('users',
             searchFor,
+            page,
             perPage);  
       } 
       else {
-        return this.getUsers(perPage);      
+        return this.getUsers(page,
+          perPage);      
       }
   }
 
-	getUsers(perPage: string = '10'){
-		return this.makeRequest(`users`,
-      perPage);
+	getUsers(page: string = '1',
+    perPage: string = '100'){
+		  return this.makeRequest(`users`,
+        page,
+        perPage);
 	}
 
 	getUser(user:string){
@@ -45,27 +51,42 @@ export class Github {
   }
 
 	private makeRequest(path: string,
-    perPage: string = '10'){
+    page: string = '1',
+    perPage: string = '100'){
       
       let params = new URLSearchParams();
-      params.set('per_page', perPage);
+      //params.set('page', page);
+      params.set('per_page', (+page * +perPage).toString());
 
       let url = `https://api.github.com/${ path }`;
+      
       return this.http.get(url, {search: params})
-        .map((res) => res.json());
+        .map((res) => res.json())
+        //.do(data => {console.log('All: ' + JSON.stringify(data))})
+        .catch(this.handleError);
 	}
   
 	private makeSearchRequest(path: string,
     searchFor: string,
-    perPage: string = '10'){
+    page: string = '1',
+    perPage: string = '100'){
       
       let params = new URLSearchParams();
       params.set('q', searchFor);
+      params.set('page', page);
       params.set('per_page', perPage);
       
       let url = `https://api.github.com/search/${ path }`;
       
       return this.http.get(url, {search: params})
-        .map((res) => res.json().items);
+        .map((res) => res.json().items)
+        .do(data => {console.log('All: ' + JSON.stringify(data))})
+        .catch(this.handleError);
 	}  
+  
+  private handleError(error: Response){
+    console.log(error);
+    return Observable.throw(error.json().error ||
+      'Server Error');
+  }
 }

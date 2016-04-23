@@ -1,6 +1,6 @@
 <h3>User list</h3>
 
-<div style="height:100px; overflow:auto; border:1px" [InfiniteScroll] (scroll2)="loadMore($event)">
+<div style="height:200px; overflow:auto; border:1px" [InfiniteScroll] (scroll2)="loadMore($event)">
   <ul>
     <li *ngFor="#user of users | async">
       <a [routerLink]=" ['UserDetail', {name: user.login}] ">
