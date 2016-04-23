@@ -24,8 +24,10 @@
   },
   "dependencies": {
     "angular2": "2.0.0-beta.15",
+    "angular2-moment": "^0.5.0",
     "bootstrap": "^3.3.6",
     "core-js": "^2.2.0",
+    "moment": "^2.13.0",
     "ng2-bootstrap": "^1.0.13",
     "rxjs": "5.0.0-beta.2",
     "zone.js": "0.6.10"
