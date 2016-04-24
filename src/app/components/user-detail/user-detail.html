@@ -1,95 +1,101 @@
-<div style="width:250px;">
-  <img src="{{userDetails.avatar_url}}" alt="..." class="img-thumbnail">
-</div>
-<div>
-  <div>
-    <h1>{{userDetails.name}}</h1>  
-    <h3>{{userDetails.login}}</h3>
-  </div>
-  <div>
-    
-    <dl class="dl-horizontal">
-      <dt>Email</dt>
-      <dd>{{userDetails.email}}</dd>
-    </dl>    
-    <dl class="dl-horizontal">
-      <dt>Blog</dt>
-      <dd>{{userDetails.blog}}</dd>
-    </dl>   
-    <dl class="dl-horizontal">
-      <dt>Company</dt>
-      <dd>{{userDetails.company}}</dd>
-    </dl>   
-    <dl class="dl-horizontal">
-      <dt>location</dt>
-      <dd>{{userDetails.location}}</dd>
-    </dl>   
-    <dl class="dl-horizontal">
-      <dt>Hireable</dt>
-      <dd>{{userDetails.hireable}}</dd>
-    </dl> 
-    <dl class="dl-horizontal">
-      <dt>Type</dt>
-      <dd>{{userDetails.type}}</dd>
-    </dl>     
-                    
-  </div>
-  <div>
-    
-    <dl class="dl-horizontal">
-      <dt>Public repos</dt>
-      <dd>{{userDetails.public_repos}}</dd>
-    </dl>      
-    <dl class="dl-horizontal">
-      <dt>Public gists</dt>
-      <dd>{{userDetails.public_gists}}</dd>
-    </dl>       
-    <dl class="dl-horizontal">
-      <dt>Followers</dt>
-      <dd>{{userDetails.followers}}</dd>
-    </dl>       
-    <dl class="dl-horizontal">
-      <dt>Following</dt>
-      <dd>{{userDetails.following}}</dd>
-    </dl>     
-
-  </div>
-</div>
-
-<h3>Repo list</h3>
-  
-<div *ngFor="#repo of userRepos">
-  
+<div class="container">
   <div class="row">
-    <div class="col-md-8">
-
-      <h5>
-        <small>
-          <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-          {{ repo.stargazers_count }} - 
-          size: {{ repo.size }} -    
-          {{ repo.language }} 
-        </small>
-        <br>
-        <strong>{{ repo.name }}</strong>
-        <span *ngIf="repo.fork == true">
-          <sup><small>Forked</small></sup>
-        </span>       
-      </h5>
-      <h5>
-        {{ repo.description }}
-      </h5>
-      <small> 
-        Created on {{ repo.created_at | amCalendar }}, updated on {{ repo.updated_at | amCalendar }}
-      </small>      
+    <div class="col-md-3">
+      <div style="width:250px;">
+        <img src="{{userDetails.avatar_url}}" alt="..." class="img-thumbnail">
+      </div>
     </div>
-    <div class="col-md-4">
-    </div>
-  </div>  
-  
-  <hr>
+    <div class="col-md-9">
+      <h3><strong>{{userDetails.name}}</strong></h3>  
+      <h4>{{userDetails.login}}</h4>
+      <hr>
       
+      <div class="row">
+        <div class="col-md-4">
+          <dl class="dl-horizontal">
+            <dt>Email</dt>
+            <dd>{{userDetails.email}}</dd>
+          </dl>    
+          <dl class="dl-horizontal">
+            <dt>Blog</dt>
+            <dd>{{userDetails.blog}}</dd>
+          </dl>     
+          <dl class="dl-horizontal">
+            <dt>location</dt>
+            <dd>{{userDetails.location}}</dd>
+          </dl>   
+        </div>
+        <div class="col-md-4">
+          <dl class="dl-horizontal">
+            <dt>Company</dt>
+            <dd>{{userDetails.company}}</dd>
+          </dl> 
+          <dl class="dl-horizontal">
+            <dt>Hireable</dt>
+            <dd>{{userDetails.hireable}}</dd>
+          </dl>    
+          <dl class="dl-horizontal">
+            <dt>Type</dt>
+            <dd>{{userDetails.type}}</dd>
+          </dl>          
+        </div>
+        <div class="col-md-4">
+          <dl class="dl-horizontal">
+            <dt>Public repos</dt>
+            <dd>{{userDetails.public_repos}}</dd>
+          </dl>      
+          <dl class="dl-horizontal">
+            <dt>Public gists</dt>
+            <dd>{{userDetails.public_gists}}</dd>
+          </dl>       
+          <dl class="dl-horizontal">
+            <dt>Followers</dt>
+            <dd>{{userDetails.followers}}</dd>
+          </dl>       
+          <dl class="dl-horizontal">
+            <dt>Following</dt>
+            <dd>{{userDetails.following}}</dd>
+          </dl>               
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-      
+
+<div class="container">
+  <div *ngFor="#repo of userRepos">
+    <div class="row">
+      <div class="col-md-8">
+        <h5>
+          <small>
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+            {{ repo.stargazers_count }} - 
+            size: {{ repo.size }} -    
+            {{ repo.language }} 
+          </small>
+          <br>
+          <a href="{{repo.html_url}}" target="_blank">
+            <strong>
+              {{ repo.name }}
+            </strong>     
+          </a>
+          <span *ngIf="repo.fork == true">
+            <sup><small>Forked</small></sup>
+          </span>       
+        </h5>
+        <h5>
+          {{ repo.description }}
+        </h5>
+        <small> 
+          Created on {{ repo.created_at | amCalendar }}, updated on {{ repo.updated_at | amCalendar }}
+        </small>      
+      </div>
+      <div class="col-md-4">
+      </div>
+    </div>    
+    <hr>
+  </div>            
+</div>    
+
 <pre>this.userDetails = {{ userDetails | json }}</pre>
 <pre>this.userRepos = {{ userRepos | json }}</pre>
