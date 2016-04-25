@@ -1,11 +1,16 @@
 <h3>User list</h3>
 
-<div style="height:200px; overflow:auto; border:1px" [InfiniteScroll] (scroll2)="loadMore($event)">
-  <ul>
-    <li *ngFor="#user of users | async">
-      <a [routerLink]=" ['UserDetail', {name: user.login}] ">
-        {{ user.login }}
-      </a>
-    </li> 
-  </ul>  
+<div class="container" style="height:400px; overflow:auto; border:1px" [InfiniteScroll] (scroll2)="loadMore($event)">
+  <div class="row" *ngFor="#user of users | async" style="padding:10px">
+    <div class="col-md-3">
+      <img class="img-thumbnail" data-src="{{ user.avatar_url }}" alt="Card image cap" width="150" height="150">
+    </div>
+    <div class="col-md-9"> 
+      <h5>     
+        <a href="#" class="card-link" [routerLink]="['UserDetail', {name: user.login}]">
+          <strong>{{ user.login }}</strong>
+        </a>
+      </h5>
+    </div>
+  </div>  
 </div>

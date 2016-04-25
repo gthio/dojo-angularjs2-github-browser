@@ -1,6 +1,9 @@
-<h3>GitHub User Browser</h3>
-
-<input type="text" #userName placeholder="Search Github Users" >
-<button (click)="searchForUser(userName.value)">Search Users</button>
-
+<div class="container">
+  <h3>GitHub User Browser</h3>
+  <div class="row">
+    <input class="form-control" type="text" #userName placeholder="Search Github Users" >
+    <button class="btn btn-default" (click)="searchForUser(userName.value)">Search Users</button>
+  </div>
+</div>
+<br>
 <router-outlet></router-outlet>
