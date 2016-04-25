@@ -12,10 +12,16 @@ export class Github {
     perPage: string = '100'){
       if (searchFor != null &&
         searchFor.length > 0){
+          
+          var x: Map<string, string> = new Map<string, string>();
+            x.set("location", "Singapore");
+            //x.set("language", "Javascript");
+          
           return this.makeSearchRequest('users',
             searchFor,
             page,
-            perPage);  
+            perPage,
+            x);  
       } 
       else {
         return this.getUsers(page,
@@ -69,12 +75,22 @@ export class Github {
 	private makeSearchRequest(path: string,
     searchFor: string,
     page: string = '1',
-    perPage: string = '100'){
+    perPage: string = '100',
+    parameters: Map<string, string>){
+      
+      let test = searchFor + '+location:' + parameters.get('location');
+      
+      parameters.forEach(function (value, key) {
+        params.set(key.toString(), value.toString());
+      })
+      
+      //let params = new URLSearchParams();
+      //params.set('q', searchFor);
+      //params.set('page', page);
+      //params.set('per_page', perPage);
       
       let params = new URLSearchParams();
-      params.set('q', searchFor);
-      params.set('page', page);
-      params.set('per_page', perPage);
+      params.set('q', test)
       
       let url = `https://api.github.com/search/${ path }`;
       
