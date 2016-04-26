@@ -8,14 +8,14 @@ export class Github {
 	constructor(private http: Http) {}
 
   searchUsers(searchFor: string,
-    page: string = '1',
+    page: string = '0',
     perPage: string = '100'){
       if (searchFor != null &&
         searchFor.length > 0){
           
           var x: Map<string, string> = new Map<string, string>();
-            x.set("location", "Singapore");
-            //x.set("language", "Javascript");
+            //x.set("location", "");
+            x.set("language", "javascript");
           
           return this.makeSearchRequest('users',
             searchFor,
@@ -78,19 +78,12 @@ export class Github {
     perPage: string = '100',
     parameters: Map<string, string>){
       
-      let test = searchFor + '+location:' + parameters.get('location');
-      
-      parameters.forEach(function (value, key) {
-        params.set(key.toString(), value.toString());
-      })
-      
-      //let params = new URLSearchParams();
-      //params.set('q', searchFor);
-      //params.set('page', page);
-      //params.set('per_page', perPage);
-      
+      let searchCriteria = this.flattenMap(parameters, '+');
       let params = new URLSearchParams();
-      params.set('q', test)
+
+      params.set('q', searchFor + '+' + searchCriteria);
+      params.set('page', page);
+      params.set('per_page', perPage);
       
       let url = `https://api.github.com/search/${ path }`;
       
@@ -104,5 +97,18 @@ export class Github {
     console.log(error);
     return Observable.throw(error.json().error ||
       'Server Error');
+  }
+  
+  private flattenMap(data: Map<string, string>,
+    delimiter: string){
+    
+      var holder = new Array();
+      data.forEach(function (value, key){
+        holder.push(key + ':' + value + delimiter);
+      });
+    
+      var text = holder.join("");
+      
+      return text.substr(0, text.length - 1);
   }
 }
