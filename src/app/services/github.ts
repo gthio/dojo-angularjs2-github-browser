@@ -47,6 +47,14 @@ export class Github {
   getReposForUser(user: string){
     return this.makeRequest(`users/${user}/repos`);
   }
+  
+  getLocations(){
+    return ['Singapore', 'Australia'];
+  }
+  
+  getLAnguages(){
+    return ['Javascript', 'Ruby'];
+  }
 
 	private makeRequest(path: string,
     page: string = '1',

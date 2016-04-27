@@ -39,11 +39,15 @@ export class UserList {
     let pageNumber = $event.pageNumber;
     let pageSize = '10';
       
-    let parameter = this.params.get('searchFor');
+    let searchValue = this.params.get('searchValue');
+    let location = this.params.get('location');
+    let language = this.params.get('language');
       
-    let result = this.github.searchUsers(parameter,
+    let result = this.github.searchUsers(searchValue,
       pageNumber,
-      pageSize);
+      pageSize,
+      location,
+      language);
       
     result.subscribe(data => {      
       this.dataStore.push(...data);

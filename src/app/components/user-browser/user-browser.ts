@@ -14,7 +14,7 @@ import {WINDOW, WINDOW_PROVIDERS} from '../../services/window-service';
   pipes: []
 })
 @RouteConfig([
-	{path: '/',       component: UserList,   name: 'UserList'},
+	{path: '/',       component: UserList,      name: 'UserList'},
   {path: '/:name',  component: UserDetail,    name: 'UserDetail'},
 ])
 export class UserBrowser {
@@ -24,6 +24,8 @@ export class UserBrowser {
   }
 
   searchForUser(searchKey: string){
-    this.router.navigate(['UserList', {searchFor: searchKey}]);
+    this.router.navigate(['UserList', {searchValue: searchKey, 
+      location: 'Singapore',
+      language: 'Javascript'}]);
   }
 }
