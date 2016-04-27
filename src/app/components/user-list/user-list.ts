@@ -18,15 +18,17 @@ import 'rxjs/add/operator/map';
 })
 export class UserList {
   
-  users: Observable<any>
-  private userObserver: Observer<any> 
+  users: Observable<any[]>
+  private userObserver: Observer<any[]> 
+  private dataStore: any[];
     
   constructor(public github: Github, 
     public params: RouteParams) {
   }
-
+  
   ngOnInit() {
-    this.users = new Observable(observer => this.userObserver = observer);
+    this.users = new Observable(observer => this.userObserver = observer).share();
+    this.dataStore = [];
   }
   
   loadMore($event: any){
@@ -42,8 +44,9 @@ export class UserList {
       pageNumber,
       pageSize);
       
-    result.subscribe(data => {        
-      this.userObserver.next(data);  
-      });
+    result.subscribe(data => {      
+      this.dataStore.push(...data);
+      this.userObserver.next(this.dataStore);  
+    });
   }  
 }
