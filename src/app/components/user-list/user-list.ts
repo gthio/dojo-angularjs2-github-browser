@@ -19,6 +19,7 @@ import 'rxjs/add/operator/map';
 export class UserList {
   
   users: Observable<any[]>
+  
   private userObserver: Observer<any[]> 
   private dataStore: any[];
     
