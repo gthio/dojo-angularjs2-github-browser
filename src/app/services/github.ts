@@ -8,33 +8,25 @@ export class Github {
 	constructor(private http: Http) {}
 
   searchUsers(searchFor: string,
-    page: string = '0',
-    perPage: string = '100'){
-      if (searchFor != null &&
-        searchFor.length > 0){
+    page: string = '1',
+    perPage: string = '100',
+    location: string = '',
+    language: string = '',
+    repoCount: number = 1,
+    followerCount: number = 1){
+      
+    var searchParameters: Map<string, any> = new Map<string, any>();
+    searchParameters.set("location", location);
+    searchParameters.set("language", language);
+    searchParameters.set("repos", repoCount);
+    searchParameters.set("followers", followerCount);
           
-          var x: Map<string, string> = new Map<string, string>();
-            //x.set("location", "");
-            x.set("language", "javascript");
-          
-          return this.makeSearchRequest('users',
-            searchFor,
-            page,
-            perPage,
-            x);  
-      } 
-      else {
-        return this.getUsers(page,
-          perPage);      
-      }
+    return this.makeSearchRequest('users',
+      searchFor,
+      page,
+      perPage,
+      searchParameters);  
   }
-
-	getUsers(page: string = '1',
-    perPage: string = '100'){
-		  return this.makeRequest(`users`,
-        page,
-        perPage);
-	}
 
 	getUser(user:string){
 		return this.makeRequest(`users/${user}`);
@@ -68,17 +60,22 @@ export class Github {
       
       return this.http.get(url, {search: params})
         .map((res) => res.json())
-        //.do(data => {console.log('All: ' + JSON.stringify(data))})
+        .do(data => {console.log('All: ' + JSON.stringify(data))})
         .catch(this.handleError);
 	}
   
 	private makeSearchRequest(path: string,
     searchFor: string,
-    page: string = '1',
-    perPage: string = '100',
-    parameters: Map<string, string>){
-      
-      let searchCriteria = this.flattenMap(parameters, '+');
+    page: string,
+    perPage: string,
+    parameters: Map<string, any>){
+            
+      let searchCriteria = this.flattenMap(parameters, 
+        '+',
+        true);
+        
+      console.log(searchCriteria);   
+        
       let params = new URLSearchParams();
 
       params.set('q', searchFor + '+' + searchCriteria);
@@ -99,12 +96,22 @@ export class Github {
       'Server Error');
   }
   
-  private flattenMap(data: Map<string, string>,
-    delimiter: string){
+  private flattenMap(data: Map<string, any>,
+    delimiter: string,
+    isIgnoreEmptyValue: boolean){
     
       var holder = new Array();
-      data.forEach(function (value, key){
-        holder.push(key + ':' + value + delimiter);
+      data.forEach(function (value, key){      
+        
+        if (typeof(value) == 'string'){
+          if (value.length > 0 ||
+            (value.length == 0 && !isIgnoreEmptyValue)){
+              holder.push(key + ':' + value + delimiter);    
+          }
+        }  
+        else if (typeof(value) == 'number'){
+          holder.push(key + ':>' + value + delimiter);
+        }      
       });
     
       var text = holder.join("");
