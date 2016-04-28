@@ -22,10 +22,20 @@ export class UserBrowser {
   constructor(private router:Router, 
     private github: Github) {
   }
+  
+  selectedLocation: string;
+  selectedLanguage: string;
+  
+  locations: string[] = this.github.getLocations();
+  languages: string[] = this.github.getLanguages();
 
   searchForUser(searchKey: string){
     this.router.navigate(['UserList', {searchValue: searchKey, 
-      location: 'Singapore',
-      language: 'Javascript'}]);
+      location: this.selectedLocation,
+      language: this.selectedLanguage}]);
+  }
+  
+  onSelect(selected) {
+    console.log('selected: ' + selected);
   }
 }

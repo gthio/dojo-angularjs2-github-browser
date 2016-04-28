@@ -49,11 +49,13 @@ export class Github {
   }
   
   getLocations(){
-    return ['Singapore', 'Australia'];
+    return ['Singapore', 'Australia', 'Indonesia', 'Malaysia', 'Vietnam', 
+      'UK', 'USA', 'Sweden', 'China', 'Japan'];
   }
   
-  getLAnguages(){
-    return ['Javascript', 'Ruby'];
+  getLanguages(){
+    return ['Javascript', 'Java', 'Python', 'PHP', 'Ruby', 'Golang', 'CSharp', 'C', 'C++', 
+      'Typescript', 'Clojure', 'R', 'Swift', 'Haskell', 'HTML', 'CSS', 'Objective-C', 'Matlab'];
   }
 
 	private makeRequest(path: string,

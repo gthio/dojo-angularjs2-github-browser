@@ -2,6 +2,18 @@
   <h3>GitHub User Browser</h3>
   <div class="row">
     <input class="form-control" type="text" #userName placeholder="Search Github Users" >
+    <label>Locations:</label> 
+    <select [(ngModel)]="selectedLocation" (change)="onSelect($event.target.value)">
+      <option value="0">--Select--</option>
+        <option *ngFor="#location of locations" value= {{location}}>{{location}}
+        </option>
+    </select>    
+    <label>Languages:</label> 
+    <select [(ngModel)]="selectedLanguage" (change)="onSelect($event.target.value)">
+      <option value="0">--Select--</option>
+        <option *ngFor="#language of languages" value= {{language}}>{{language}}
+        </option>
+    </select>    
     <button class="btn btn-default" (click)="searchForUser(userName.value)">Search Users</button>
   </div>
 </div>
