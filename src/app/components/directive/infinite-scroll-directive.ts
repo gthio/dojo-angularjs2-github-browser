@@ -15,7 +15,6 @@ export class InfiniteScrollDirective{
   @Output() scroll2 = new EventEmitter();
   
   constructor(el: ElementRef){ 
-    console.log('constructor');
     this._el = el.nativeElement; 
   }
   
@@ -26,10 +25,8 @@ export class InfiniteScrollDirective{
   
   onScroll(){   
     if (this._el.scrollTop + this._el.offsetHeight >= this._el.scrollHeight){
-      
       this.scroll2.emit({pageNumber: this.counter});
       this.counter += 1;
-      
     }
   }
 }
