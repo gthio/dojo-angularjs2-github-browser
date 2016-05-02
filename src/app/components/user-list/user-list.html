@@ -1,6 +1,6 @@
 <h3>User list</h3>
 
-<div class="container" style="height:400px; overflow:auto; border:1px" [InfiniteScroll] (scroll2)="loadMore($event)">
+<div id="test" class="container" style="height:400px; border:1px" [InfiniteWindowScroll] (scroll2)="loadMore($event)">
   <div class="row" *ngFor="#user of users | async" style="padding:10px">
     <div class="col-md-3">
       <img class="img-thumbnail" data-src="{{ user.avatar_url }}" alt="Card image cap" width="150" height="150">

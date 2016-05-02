@@ -1,10 +1,9 @@
-import {Component, Inject} from 'angular2/core';
-import {Github} from '../../services/github';
+import {Component, Inject, Injectable} from 'angular2/core';
+import {RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Observer} from 'rxjs/Observer';
 import {Observable} from 'rxjs/Observable';
-import {RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
-import {InfiniteScrollDirective} from '../directive/infinite-scroll-directive';
-import {Injectable} from 'angular2/core';
+import {Github} from '../../services/github';
+import {InfiniteWindowScrollDirective} from '../directive/infinite-window-scroll-directive';
 
 import 'rxjs/add/operator/map';
 
@@ -13,18 +12,19 @@ import 'rxjs/add/operator/map';
   templateUrl: 'app/components/user-list/user-list.html',
   styleUrls: ['app/components/user-list/user-list.css'],
   providers: [],
-  directives: [ ROUTER_DIRECTIVES, InfiniteScrollDirective ],
+  directives: [ ROUTER_DIRECTIVES, InfiniteWindowScrollDirective ],
   pipes: []
 })
 export class UserList {
   
   users: Observable<any[]>
-  
+    
   private userObserver: Observer<any[]> 
   private dataStore: any[];
     
   constructor(public github: Github, 
     public params: RouteParams) {
+
   }
   
   ngOnInit() {
@@ -34,7 +34,7 @@ export class UserList {
   
   loadMore($event: any){
    
-    console.log('Load ' + $event.pageNumber);
+    console.log('LoadMore ' + $event.pageNumber);
 
     let pageNumber = $event.pageNumber;
     let pageSize = '10';
