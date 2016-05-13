@@ -1,20 +1,34 @@
 <div class="container">
   <h3>GitHub User Browser</h3>
   <div class="row">
-    <input class="form-control" type="text" #userName placeholder="Search Github Users" >
-    <label>Locations:</label> 
-    <select [(ngModel)]="selectedLocation" (change)="onSelect($event.target.value)">
-      <option value="0">--Select--</option>
-        <option *ngFor="#location of locations" value= {{location}}>{{location}}
+    <div class="col-xs-4">
+      <label class="control-label">Name / account / email:</label> 
+      <input class="form-control" type="text" #userName placeholder="Search Github Users">
+    </div>
+    <div class="col-xs-3">
+      <label class="control-label">Locations:</label> 
+      <select [(ngModel)]="selectedLocation" (change)="onSelect($event.target.value)" class="form-control">
+        <option value="0" selected>--Any Location--</option>
+        <option *ngFor="#location of locations" value= {{location}}>
+          {{location}}
         </option>
-    </select>    
-    <label>Languages:</label> 
-    <select [(ngModel)]="selectedLanguage" (change)="onSelect($event.target.value)">
-      <option value="0">--Select--</option>
-        <option *ngFor="#language of languages" value= {{language}}>{{language}}
+      </select>     
+    </div>   
+    <div class="col-xs-3">
+      <label class="control-label">Languages:</label> 
+      <select [(ngModel)]="selectedLanguage" (change)="onSelect($event.target.value)" class="form-control">
+        <option value="0" selected>--Any Language--</option>
+        <option *ngFor="#language of languages" value= {{language}}>
+          {{language}}
         </option>
-    </select>    
-    <button class="btn btn-default" (click)="searchForUser(userName.value)">Search Users</button>
+      </select>          
+    </div>
+    <div>
+      <br>
+      <button class="btn btn-default" (click)="searchForUser(userName.value)">
+        Search Users
+      </button>      
+    </div>
   </div>
 </div>
 <br>
